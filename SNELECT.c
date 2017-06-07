@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<string.h>
+char c[100];
+int main()
+{
+	int t,l,i,s,m;
+	scanf("%d",&t);
+	while(t)
+	{
+		scanf("%s",c);
+		l=strlen(c);
+		s=0;
+		m=0;
+		for(i=0;i<l;)
+		{
+			if(c[i]=='s')
+			{
+				s++;
+				i++;
+			}
+			else
+			{
+				m++;
+				if(i==0)
+				{
+					if(c[i+1]=='s')
+					{
+						c[i+1]='S';
+						i=i+2;
+					}
+					else
+					i++;
+				}
+				else if(i==(l-1))
+				{
+					if(c[i-1]=='s')
+					{
+						s--;
+						i++;
+					}
+					else
+					i++;
+				}
+				else
+				{
+					if(c[i-1]=='s')
+					{
+						s--;
+						i++;
+					}
+					else
+					{
+						if(c[i+1]=='s')
+						{
+							c[i+1]='S';
+							i=i+2;
+						}
+						else
+						i++;
+					}
+				}
+			}
+		}
+		if(s>m)
+		printf("snakes\n");
+		else if(m>s)
+		printf("mongooses\n");
+		else
+		printf("tie\n");
+		t--;
+	}
+	return 0;
+}

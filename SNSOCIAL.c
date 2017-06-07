@@ -1,0 +1,72 @@
+#include<stdio.h>
+long int arr[502][502];
+int main()
+{
+	long int t,n,m,max,maxno,i,j,k,l,hour;
+	scanf("%ld",&t);
+	while(t)
+	{
+		scanf("%ld %ld",&n,&m);
+		max=0;
+		maxno=0;;
+		for(i=1;i<=n;i++)
+		{
+			for(j=1;j<=m;j++)
+			{
+				scanf("%ld",&arr[i][j]);
+				if(arr[i][j]==max)
+				maxno++;
+				else if(arr[i][j]>max)
+				{
+					max=arr[i][j];
+					maxno=1;
+				}
+			}
+		}
+		for(i=0;i<=m+1;i++)
+		{
+			arr[0][i]=max;
+			arr[n+1][i]=max;
+		}
+		for(i=1;i<=n;i++)
+		{
+			arr[i][0]=max;
+			arr[i][m+1]=max;
+		}
+		hour=0;
+		while(maxno<(m*n))
+		{
+			for(i=1;i<=n;i++)
+			{
+				for(j=1;j<=m;j++)
+				{
+					if(arr[i][j]==max)
+					{
+						for(k=i-1;k<=(i+1);k++)
+						{
+							for(l=j-1;l<=(j+1);l++)
+							{
+								if((arr[k][l]==max)||(arr[k][l]==0));
+								else
+								{
+									arr[k][l]=0;
+									maxno++;
+								}
+							}
+						}
+					}
+				}
+			}
+			for(i=1;i<=n;i++)
+			{
+				for(j=1;j<=m;j++)
+				if(arr[i][j]==0)
+				arr[i][j]=max;
+			}
+			hour++;
+		}
+		printf("%ld\n",hour);
+		t--;
+	}
+	return 0;
+}
